@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-import '../../secure_enclave_base.dart';
-import '../models/access_control_model.dart';
-import '../models/result_model.dart';
-
-
+import 'package:secure_enclave/secure_enclave_base.dart';
+import 'package:secure_enclave/src/models/access_control_model.dart';
+import 'package:secure_enclave/src/models/result_model.dart';
 
 abstract class SecureEnclavePlatform extends PlatformInterface implements SecureEnclaveBase {
   /// Constructs a SecureEnclavePlatform.
@@ -28,7 +26,6 @@ abstract class SecureEnclavePlatform extends PlatformInterface implements Secure
     _instance = instance;
   }
 }
-
 
 class SecureEnclaveSwift extends SecureEnclavePlatform {
   /// The method channel used to interact with the native platform.

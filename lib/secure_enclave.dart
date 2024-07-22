@@ -6,7 +6,7 @@ import 'package:secure_enclave/secure_enclave_base.dart';
 import 'package:secure_enclave/src/models/access_control_model.dart';
 import 'package:secure_enclave/src/models/result_model.dart';
 
-import 'src/platform/secure_encalve_swift.dart';
+import 'src/platform/secure_enclave_swift.dart';
 
 export 'src/constants/access_control_option.dart';
 export 'src/models/access_control_model.dart';
