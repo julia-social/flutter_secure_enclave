@@ -78,7 +78,7 @@ class _AppPasswordBiometryState extends State<AppPasswordBiometry> {
                         );
 
                         if (res.error != null) {
-                          if (!mounted) return;
+                          if (!context.mounted) return;
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(res.error!.desc.toString())));
                         }
@@ -95,11 +95,11 @@ class _AppPasswordBiometryState extends State<AppPasswordBiometry> {
                         cipherTextAppPassword.text =
                             hex.encode(cipherUint8List.value).toString();
                         appPassword.clear();
-                        if (!mounted) return;
+                        if (!context.mounted) return;
                         Navigator.pop(context);
                         setState(() {});
                       } else {
-                        if (!mounted) return;
+                        if (!context.mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content:
                                 Text(cipherUint8List.error!.desc.toString())));
@@ -167,11 +167,11 @@ class _AppPasswordBiometryState extends State<AppPasswordBiometry> {
                       if (cipherText.value != null) {
                         plainTextAppPassword.text = cipherText.value;
                         appPassword.clear();
-                        if (!mounted) return;
+                        if (!context.mounted) return;
                         Navigator.pop(context);
                         setState(() {});
                       } else {
-                        if (!mounted) return;
+                        if (!context.mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(cipherText.error!.desc.toString())));
                       }
@@ -282,7 +282,7 @@ class _AppPasswordBiometryState extends State<AppPasswordBiometry> {
                       );
 
                       if (res.error != null) {
-                        if (!mounted) return;
+                        if (!context.mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(res.error!.desc.toString())));
                       }
@@ -299,14 +299,16 @@ class _AppPasswordBiometryState extends State<AppPasswordBiometry> {
                           hex.encode(cipherUint8List.value).toString();
                       setState(() {});
                     } else {
-                      if (!mounted) return;
+                      if (!context.mounted) return;
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content:
                               Text(cipherUint8List.error!.desc.toString())));
                     }
                   } catch (e) {
-                    ScaffoldMessenger.of(context)
+                    if (context.mounted){
+                      ScaffoldMessenger.of(context)
                         .showSnackBar(SnackBar(content: Text(e.toString())));
+                    }
                     log(e.toString());
                   }
                 }
@@ -376,13 +378,15 @@ class _AppPasswordBiometryState extends State<AppPasswordBiometry> {
                       plainTextBiometry.text = plain.value;
                       setState(() {});
                     } else {
-                      if (!mounted) return;
+                      if (!context.mounted) return;
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text(plain.error!.desc.toString())));
                     }
                   } catch (e) {
-                    ScaffoldMessenger.of(context)
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context)
                         .showSnackBar(SnackBar(content: Text(e.toString())));
+                    }
                     log(e.toString());
                   }
                 }
