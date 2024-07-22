@@ -136,8 +136,10 @@ class _SignatureVerifyState extends State<SignatureVerify> {
                   signatureText.text = signature.toString();
                   setState(() {});
                 } catch (e) {
-                  ScaffoldMessenger.of(context)
+                  if(context.mounted) {
+                    ScaffoldMessenger.of(context)
                       .showSnackBar(SnackBar(content: Text(e.toString())));
+                  }
                   log(e.toString());
                 }
                 // }
@@ -183,8 +185,10 @@ class _SignatureVerifyState extends State<SignatureVerify> {
                     plainText2.text = res.toString();
                     setState(() {});
                   } catch (e) {
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(SnackBar(content: Text(e.toString())));
+                    if(context.mounted) {
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text(e.toString())));
+                    }
                     log(e.toString());
                   }
                 }

@@ -126,7 +126,7 @@ class _AppPasswordState extends State<AppPassword> {
                     );
 
                     if (res.error != null) {
-                      if (!mounted) return;
+                      if (!context.mounted) return;
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text(res.error!.desc.toString())));
                     }
@@ -144,13 +144,15 @@ class _AppPasswordState extends State<AppPassword> {
                         hex.encode(cipherUint8List.value).toString();
                     setState(() {});
                   } else {
-                    if (!mounted) return;
+                    if (!context.mounted) return;
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text(cipherUint8List.error!.desc.toString())));
                   }
                 } catch (e) {
-                  ScaffoldMessenger.of(context)
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context)
                       .showSnackBar(SnackBar(content: Text(e.toString())));
+                  }
                   log(e.toString());
                 }
                 // }
@@ -195,13 +197,15 @@ class _AppPasswordState extends State<AppPassword> {
                       plainText2.text = plain.value;
                       setState(() {});
                     } else {
-                      if (!mounted) return;
+                      if (!context.mounted) return;
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text(plain.error!.desc.toString())));
                     }
                   } catch (e) {
-                    ScaffoldMessenger.of(context)
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context)
                         .showSnackBar(SnackBar(content: Text(e.toString())));
+                    }
                     log(e.toString());
                   }
                 }
