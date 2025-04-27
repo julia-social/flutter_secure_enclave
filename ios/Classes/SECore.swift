@@ -68,7 +68,7 @@ class SECore : SECoreProtocol {
         }
         
         if let secAttrApplicationTag = secAttrApplicationTag {
-            if TARGET_OS_SIMULATOR != 0 {
+            #if targetEnvironment(simulator)
                 // target is current running in the simulator
                 parameterTemp = [
                     kSecAttrKeyType as String           : kSecAttrKeyTypeEC,
@@ -79,7 +79,7 @@ class SECore : SECoreProtocol {
                         kSecAttrAccessControl as String     : secAttrAccessControl!
                     ]
                 ]
-            } else {
+            #else 
                 parameterTemp = [
                     kSecAttrKeyType as String           : kSecAttrKeyTypeEC,
                     kSecAttrKeySizeInBits as String     : 256,
@@ -90,7 +90,7 @@ class SECore : SECoreProtocol {
                         kSecAttrAccessControl as String     : secAttrAccessControl!
                     ]
                 ]
-            }
+            #endif
             
             // cek kalau pakai app password, tambahkan password nya
             if accessControlParam.option.contains(.applicationPassword) {

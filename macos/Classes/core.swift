@@ -53,7 +53,7 @@ class Core{
                 
                 let attributes : CFDictionary
                 
-                if TARGET_OS_SIMULATOR != 0 {
+                #if targetEnvironment(simulator)
                     // target is current running in the simulator
                     attributes = [
                             kSecAttrKeyType as String           : kSecAttrKeyTypeEC,
@@ -63,7 +63,7 @@ class Core{
                                 kSecAttrAccessControl as String     : access
                             ]
                     ] as CFDictionary
-                } else {
+                #else 
                     attributes = [
                         kSecAttrTokenID as String:              kSecAttrTokenIDSecureEnclave,
                         kSecAttrKeyType as String:              kSecAttrKeyTypeEC,
@@ -74,7 +74,7 @@ class Core{
                             kSecAttrAccessControl as String:    access,
                         ],
                     ]  as CFDictionary
-                }
+                #endif
                 
                 var error: Unmanaged<CFError>?
                 if #available(macOS 10.13.4, *) {
